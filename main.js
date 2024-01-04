@@ -1,4 +1,5 @@
 function getLetterFrequency(str) {
+	str = removeWhitespaces(str)
 	const frequencyMap = new Map();
 	for (let i = 0; i < str.length; i++) {
 		const letter = str[i];
@@ -8,7 +9,13 @@ function getLetterFrequency(str) {
 			frequencyMap.set(letter, 1);
 		}
 	}
-	return frequencyMap;
+	const sortedMap = new Map([...frequencyMap.entries()].sort((a, b) => b[1] - a[1]));
+
+	let mapString = Array.from(sortedMap)
+		.map(([key, value]) => `${key}: ${value}`)
+		.join("\n");
+	
+	return mapString;
 }
 
 function removeWhitespaces(str) {
