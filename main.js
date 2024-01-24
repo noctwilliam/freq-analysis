@@ -41,7 +41,6 @@ function countSingle(str){
 	return countString;
 }
 
-
 function countDigrams(str) {
 	let digramCounts = {};
 	for (let i = 0; i < str.length - 1; i++) {
@@ -78,4 +77,29 @@ function countTrigrams(str) {
 	return trigramString;
 }
 
-countSingle("Muhammad Harith Azmi");
+function substituteCipherText(cipherText, substitutionMap) {
+	let substitutedText = '';
+	substitutionMap = constructMapFromInput(substitutionMap);
+	for (let i = 0; i < cipherText.length; i++) {
+		const letter = cipherText[i];
+		if (substitutionMap.has(letter)) {
+			substitutedText += substitutionMap.get(letter);
+		} else {
+			substitutedText += letter;
+		}
+	}
+	console.log(substitutedText);
+	return substitutedText;
+}
+
+function constructMapFromInput(input) {
+	let map = new Map();
+	let pairs = input.split(', ');
+	for (let pair of pairs) {
+		let [key, value] = pair.split(':');
+		map.set(key, value);
+	}
+	return map;
+}
+
+substituteCipherText('abc', 'a:g, b:k, c:z')
